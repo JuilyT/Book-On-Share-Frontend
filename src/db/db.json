@@ -1,0 +1,59 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "All stars",
+      "desc": "Kids",
+      "owner": {
+        "name": "rajesh",
+        "email": "rajesh@gmail.com"
+      },
+      "status": "BORROWED",
+      "borrower": null,
+      "assignDate": "2020-01-23T10:02:06.765Z"
+    },
+    {
+      "id": 2,
+      "title": "All stars",
+      "desc": "Kids",
+      "owner": {
+        "name": "suresh",
+        "email": "suresh@gmail.com"
+      },
+      "status": "BORROWED",
+      "borrower": null,
+      "assignDate": "2020-01-23T10:13:27.471Z"
+    },
+    {
+      "id": 3,
+      "title": "All stars",
+      "desc": "Kids",
+      "owner": {
+        "name": "suresh",
+        "email": "suresh@gmail.com"
+      },
+      "status": "BORROWED",
+      "borrower": null,
+      "assignDate": "2020-01-23T10:13:28.320Z"
+    },
+    {
+      "id": 4,
+      "title": "No fault",
+      "desc": "Kids",
+      "owner": {
+        "name": "rajesh",
+        "email": "rajesh@gmail.com"
+      },
+      "status": "BORROWED",
+      "borrower": null,
+      "assignDate": "2020-01-23T05:52:17.263Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "111023247928921421345",
+      "email": "juily.kumari@imaginea.com",
+      "name": "Juily Kumari"
+    }
+  ]
+}

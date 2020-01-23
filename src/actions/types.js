@@ -1,0 +1,9 @@
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';
+export const FETCH_BOOKS = 'FETCH_BOOKS';
+export const FETCH_BOOK = 'FETCH_BOOK';
+export const SEARCH_TERM = 'SEARCH_TERM';
+export const SELECTED_BOOKS = 'SELECTED_BOOKS';
+export const CLEAR_SELECTED_BOOKS = 'CLEAR_SELECTED_BOOKS';
+export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
+export const DEACTIVATE_CURRENT_USER = 'DEACTIVATE_CURRENT_USER';
