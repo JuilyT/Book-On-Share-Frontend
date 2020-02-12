@@ -14,7 +14,6 @@ export default function requireAuth(Component) {
     }
 
     checkAuth() {
-        console.log(this.props.isSignedIn);
       if ( ! this.props.isSignedIn) {
         this.props.history.push("/");
       }
@@ -29,7 +28,9 @@ export default function requireAuth(Component) {
   }
   const mapStateToProps = (state) => {
     return {
-        isSignedIn: state.auth.isSignedIn
+        isSignedIn: state.auth.isSignedIn,
+        auth: state.auth,
+        currentUser: state.currentUser
     }
   }
 

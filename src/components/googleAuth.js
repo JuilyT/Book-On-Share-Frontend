@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {signIn, signOut, saveCurrentUser, deactivateCurrentUser} from '../actions';
+import '../styles/googleAuth.scss';
 
 class GoogleAuth extends Component {
     
@@ -25,13 +26,6 @@ class GoogleAuth extends Component {
         }
     }
 
-    /*renderRedirect = () => {
-        if(this.props.isSignedIn) { 
-          return <Redirect to='/books' /> 
-        }
-        return <Redirect to='/' />
-    }*/
-
     onSignInClick = () => {
         this.auth.signIn().then(() =>  {
             let currentUser = {
@@ -41,6 +35,7 @@ class GoogleAuth extends Component {
             }
             this.props.saveCurrentUser(currentUser);
           });
+          this.props.history.push('/home');
     }
 
     onSignOutClick = () => {
@@ -48,6 +43,7 @@ class GoogleAuth extends Component {
         this.auth.signOut().then(()=>{
             this.props.deactivateCurrentUser(currentUserId);
         });
+        this.props.history.push('/home');
     }
 
     renderAuthButton = () => {
@@ -55,7 +51,7 @@ class GoogleAuth extends Component {
             return null;
         } else if(this.props.isSignedIn) {
             return (
-                <div>
+                <div className="googleAuth">
                     <button onClick = {this.onSignOutClick} className="huge fluid ui blue google button">
                         <i className="google icon"/>
                             Sign Out
@@ -64,7 +60,7 @@ class GoogleAuth extends Component {
             );
         } else {
             return (
-                <div>
+                <div className="googleAuth">
                     <button onClick = {this.onSignInClick} className="huge fluid ui blue google button">
                         <i className="google icon"/>
                             Sign In With Google

@@ -5,6 +5,8 @@ import searchTermReducer from '../reducers/searchTermReducer';
 import selectedBooksReducer from '../reducers/selectedBooksReducer';
 import userReducer from './userReducer';
 import viewBookReducer from './viewBookReducer';
+import myBooksReducer from './myBooksreducer';
+import notificationsReducer from './notificationsReducer';
 
 export default combineReducers({
     auth: authReducer,
@@ -12,6 +14,8 @@ export default combineReducers({
     book: viewBookReducer,
     searchTerm: searchTermReducer,
     selectedBooks: selectedBooksReducer,
-    currentUser: userReducer
+    currentUser: userReducer,
+    myBooks: myBooksReducer,
+    notification: notificationsReducer
 });
 

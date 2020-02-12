@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { onSelectedBooks } from '../actions';
+import Modal from './modal.component';
+import Pagination from './pagination.component';
 import '../styles/table.scss';
 
 class Table extends React.Component {
@@ -12,11 +13,15 @@ class Table extends React.Component {
 
     handleClick = (book) => {
         if(book.status !== "BORROWED") {
+            var currentDate = new Date();
+            var numberOfDaysToAdd = 3;
+            currentDate.setDate(currentDate.getDate() + numberOfDaysToAdd); 
             this.props.onSelectedBooks({
                 ...book,
                 status: 'BORROWED',
                 borrower: this.props.currentUser,
-                assignDate: new Date()
+                assignDate: new Date(),
+                validTill: currentDate
             })
         }
     }
@@ -27,18 +32,27 @@ class Table extends React.Component {
                 {this.props.data.map((book)=>{
                     return <tr key={book.id} className={this.markSelectedRow(book) ? 'active': ''} onClick={() => this.handleClick(book)}>
                             <td>
-                                <h2 className="single line">
-                                <Link to={`/book/${book.id}`}>{book.title}</Link>
+                                <h2 className="single line">{book.title}
+                                    <Modal data={book}/>
                                 </h2>
                             </td>
                             <td className="single line">
                                 {book.desc}
+                            </td>
+                            <td className="single line">
+                                {book.category}
+                            </td>
+                            <td className="single line">
+                                {book.author}
                             </td>
                             <td>
                                 <div className="single line">{book.owner.name}</div>
                             </td>
                             <td className="single line">
                                 {book.status} 
+                            </td>
+                            <td className="single line">
+                                {book.status === "BORROWED" && book.validTill ? new Date(book.validTill).toLocaleDateString() : "Available" }
                             </td>
                         </tr>
                     })
@@ -50,31 +64,23 @@ class Table extends React.Component {
     render() {
         return (
             <div>
-                <table className="ui celled padded striped table">
+                <table className="ui small celled striped table">
                         <thead>
                         <tr>
                             <th className="single line">Title</th>
                             <th>Desciption</th>
+                            <th>Category</th>
+                            <th>Author</th>
                             <th>Owner</th>
                             <th>Status</th>
+                            <th>Availability</th>
                         </tr>
                     </thead>
                     {this.renderList()}
                     <tfoot>
                         <tr>
-                            <th colSpan="5">
-                            <div className="ui right floated pagination menu">
-                                <a href="#0" className="icon item">
-                                <i className="left chevron icon"></i>
-                                </a>
-                                <Link to={`/books?_page=1`} className="item">1</Link>
-                                <Link to={`/books?_page=2`} className="item">2</Link>
-                                <Link to={`/books?_page=3`} className="item">3</Link>
-                                <Link to={`/books?_page=4`} className="item">4</Link>
-                                <a href="#0" className="icon item">
-                                <i className="right chevron icon"></i>
-                                </a>
-                            </div>
+                            <th colSpan="7">
+                                <Pagination currentTab={this.props.currentTab} currentUser={this.props.currentUser}/>
                             </th>
                         </tr>
                     </tfoot>

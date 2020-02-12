@@ -1,14 +1,24 @@
 import {
             SIGN_IN, 
             SIGN_OUT, 
-            FETCH_BOOKS, 
-            FETCH_BOOK, 
+            FETCH_BOOKS,  
             SEARCH_TERM, 
             SELECTED_BOOKS, 
             CLEAR_SELECTED_BOOKS, 
             FETCH_CURRENT_USER, 
-            DEACTIVATE_CURRENT_USER
+            DEACTIVATE_CURRENT_USER,
+            MY_BOOKS,
+            BORROW_BOOKS_SUCCESS,
+            BORROW_BOOKS_ERROR,
+            UPLOAD_BOOK_SUCCESS,
+            UPLOAD_BOOK_ERROR
         } from './types';
+import { 
+            BORROW_BOOKS_SUCCESS_MESSAGE, 
+            BORROW_BOOKS_ERROR_MESSAGE, 
+            UPLOAD_BOOK_SUCCESS_MESSAGE, 
+            UPLOAD_BOOK_ERROR_MESSAGE 
+        } from '../constants/notificationMessages';        
 import jsonServerApi from '../api/jsonserver';
 
 export const signIn = (userId) => {
@@ -24,22 +34,9 @@ export const signOut = () => {
     }
 }
 
-const fetchBookAPI = async (pageNum, dispatch) => {
-    const api = `/books/?_page=${pageNum}`;
-    const response = await jsonServerApi.get(api);
-    dispatch({
-        type: FETCH_BOOKS,
-        payload: response.data
-    });
-}
-
-export const fetchBooks = (pageNum) => async (dispatch) => {
-    fetchBookAPI(pageNum, dispatch);
-}
-
-export const fetchBooksByTerm = (term, pageNum) => async (dispatch) => {
+const fetchBookAPI = async (term, page, dispatch) => {
     const titleQuery = term ? `title=${term}`: "";
-    const api = `/books/?${titleQuery}&_page=${pageNum}`;
+    const api = `/books?${titleQuery}&_page=${page}`;
     const response = await jsonServerApi.get(api);
     dispatch({
         type: FETCH_BOOKS,
@@ -47,12 +44,8 @@ export const fetchBooksByTerm = (term, pageNum) => async (dispatch) => {
     });
 }
 
-export const fetchBookById = (bookId) => async (dispatch) => {
-    const response = await jsonServerApi.get(`/books/${bookId}`);
-    dispatch({
-        type: FETCH_BOOK,
-        payload: response.data
-    });
+export const fetchBooks = (term, page) => async (dispatch) => {
+    fetchBookAPI(term, page, dispatch);
 }
 
 export const searchTerm = (term) => {
@@ -70,8 +63,14 @@ export const onSelectedBooks = (book) => {
 }
 
 export const borrowBooks = (book) => async (dispatch) => {
-    await jsonServerApi.put(`/books/${book.id}`, book);
-    fetchBookAPI(1, dispatch);
+    jsonServerApi.put(`/books/${book.id}`, book)
+        .then(response => {
+            sendNotification(BORROW_BOOKS_SUCCESS, BORROW_BOOKS_SUCCESS_MESSAGE, dispatch);
+        })
+        .catch(error => {
+            sendNotification(BORROW_BOOKS_ERROR, `${BORROW_BOOKS_ERROR_MESSAGE}, error: ${error}`, dispatch);
+        });
+    fetchBookAPI("", 1, dispatch);
 }
 
 export const discardSelectedbooks = () => (dispatch) => {
@@ -101,5 +100,34 @@ export const deactivateCurrentUser = (userId) => async (dispatch) => {
     await jsonServerApi.delete(`users/${userId}`);
     dispatch({
         type: DEACTIVATE_CURRENT_USER
+    });
+}
+
+export const uploadBook = (book) => async (dispatch) => {
+    await jsonServerApi.post("/books", book)
+        .then(response => {
+            sendNotification(UPLOAD_BOOK_SUCCESS, UPLOAD_BOOK_SUCCESS_MESSAGE, dispatch);
+        })
+        .catch(error => {
+            sendNotification(UPLOAD_BOOK_ERROR, `${UPLOAD_BOOK_ERROR_MESSAGE}, error: ${error}`, dispatch);
+        });
+}
+
+export const getMyBooks = (status, page, userId) => async (dispatch) => {
+    const api = `/books/?status=${status}`;
+    const apiByuser = userId ? `${api}&borrower.id=${userId}` : api;
+    const apiPerPage = page ? `${apiByuser}&_page=${page}` : apiByuser;
+    const response = await jsonServerApi.get(apiPerPage);
+    
+    dispatch({
+        type: MY_BOOKS,
+        payload: response.data
+    });
+}
+
+const sendNotification = async (type, message, dispatch) => {
+    dispatch({
+        type,
+        payload: {type, message}
     });
 }
