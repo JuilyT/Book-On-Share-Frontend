@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {signIn, signOut, saveCurrentUser, deactivateCurrentUser} from '../actions';
-import '../styles/googleAuth.scss';
+import {signIn, signOut, saveCurrentUser, deactivateCurrentUser} from '../../actions';
+import { HOME, BORROW_BOOKS } from '../../constants/routeAPIs';
+import '../../styles/googleAuth.scss';
 
 class GoogleAuth extends Component {
     
@@ -34,8 +35,8 @@ class GoogleAuth extends Component {
                 name: this.auth.currentUser.get().getBasicProfile().getName()
             }
             this.props.saveCurrentUser(currentUser);
-          });
-          this.props.history.push('/home');
+            this.props.history.push(BORROW_BOOKS);
+        });
     }
 
     onSignOutClick = () => {
@@ -43,7 +44,7 @@ class GoogleAuth extends Component {
         this.auth.signOut().then(()=>{
             this.props.deactivateCurrentUser(currentUserId);
         });
-        this.props.history.push('/home');
+        this.props.history.push(HOME);
     }
 
     renderAuthButton = () => {
@@ -65,6 +66,7 @@ class GoogleAuth extends Component {
                         <i className="google icon"/>
                             Sign In With Google
                     </button>
+                    <h3 style={{textDecoration:'underline'}}>Sign in to register</h3>
                 </div>
             );
         }

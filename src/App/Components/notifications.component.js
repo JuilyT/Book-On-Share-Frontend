@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BORROW_BOOKS_SUCCESS, UPLOAD_BOOK_SUCCESS } from '../actions/types';
+import { BORROW_BOOKS_SUCCESS, UPLOAD_BOOK_SUCCESS } from '../../actions/types';
 import MessageSuccess from './messageSuccess.component';
 import MessageError from './messageError.component';
 
 class Notification extends Component {
     state = { visible: true }
+
+    componentDidUpdate(){
+        if(this.state.visible) {
+            setTimeout(() => this.setState({ visible: false }), 3000);
+        }
+    }
 
     handleDismiss = () => {
         this.setState({ visible: false });

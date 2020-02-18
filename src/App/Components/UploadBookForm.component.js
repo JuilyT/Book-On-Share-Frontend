@@ -4,9 +4,9 @@ import { Form } from 'semantic-ui-react';
 class UploadBookForm extends Component {
 
     isDirtyChange(values) {
-        return values.phoneError
+        return values.phone
                && values.location && values.location.length > 0
-               && values.bookTitleError && values.bookTitle.length > 0 
+               && values.bookTitle && values.bookTitle.length > 0 
                && values.bookAuthor && values.bookAuthor.length > 0 
                && values.bookCover && values.bookCover.length > 0;
     }

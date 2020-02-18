@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Header, Icon, Image, Modal, Grid } from 'semantic-ui-react';
+import '../styles/modal.scss';
 
 class ModalControlled extends Component {
     state = { modalOpen: false }
@@ -11,7 +12,7 @@ class ModalControlled extends Component {
     render() {
         const {title, cover, desc, author, category, status, validTill, owner} = this.props.data;
         return (
-            <div>
+            <div className='modal'>
                 <Modal trigger={<Icon link circular  color='red' size='mini' name='info' onClick={this.handleOpen}></Icon>}
                     open={this.state.modalOpen}
                     onClose={this.handleClose}

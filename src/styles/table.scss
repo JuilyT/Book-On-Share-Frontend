@@ -1,5 +1,7 @@
+@import "variables";
+
 .ui.table {
-    border: 3px solid rgba(34,36,38,.15);
+    border: 3px solid $border-color;
 }
 .ui.table:first-child {
     margin-top: 40px;

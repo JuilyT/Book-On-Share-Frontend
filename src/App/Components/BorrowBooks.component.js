@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
-import { fetchBooks } from '../actions';
-import Table from '../utils/table.component';
-import ConfirmButton from '../utils/confirmButton.component';
-import Notification from '../components/notifications.component';
+import { fetchBooks } from '../../actions';
+import Table from '../../components/table.component';
+import ConfirmButton from '../../components/confirmButton.component';
 
 class BorrowBooks extends Component {
     
     componentDidMount() {
         const values = queryString.parse(this.props.location.search);
-        const {_page}  = values;
-        
-        this.props.fetchBooks(this.props.searchTerm, _page ? _page : 1);
+        const {page}  = values;
+        this.props.fetchBooks(this.props.searchTerm, page ? page : 1);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -24,7 +22,6 @@ class BorrowBooks extends Component {
     render() {
         return (
             <div>
-                <Notification />
                 <Table data={this.props.books} currentTab="books"/>
                 <ConfirmButton history={this.props.history}/>
             </div>

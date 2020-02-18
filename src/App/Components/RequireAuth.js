@@ -2,7 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import {connect} from 'react-redux';
 import { compose } from 'redux';
-import {signIn} from '../actions';
+import {signIn} from '../../actions';
+import { HOME } from '../../constants/routeAPIs';
 
 export default function requireAuth(Component) {
 
@@ -15,7 +16,7 @@ export default function requireAuth(Component) {
 
     checkAuth() {
       if ( ! this.props.isSignedIn) {
-        this.props.history.push("/");
+        this.props.history.push(HOME);
       }
     }
 

@@ -4,11 +4,12 @@ const INITIAL_STATE = [];
 
 const addNewBook = (books, book) => {
     const newBookList = [...books];
-    if (!newBookList.some(o => o.id === book.id)) {
+    if (!newBookList.some(o => o._id === book._id)) {
         newBookList.push(book);
         return newBookList;
     } 
-    const reducedList = newBookList.filter(obj=>{return obj.id!==book.id}); 
+    const reducedList = newBookList.filter(obj=>{return obj._id!==book._id}); 
+    console.log(reducedList);
     return reducedList;
 }
 

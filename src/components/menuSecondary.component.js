@@ -5,7 +5,7 @@ import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { signIn } from '../actions';
 import { HOME, SIGN_IN, BORROW_BOOKS, UPLOAD_BOOK, MY_BOOKS } from '../constants/routeAPIs';
-import Search from '../components/searchBook.component';
+import Search from '../App/Components/SearchBook.component';
 
 class MenuSecondary extends Component {
   state = { activeLink: HOME};

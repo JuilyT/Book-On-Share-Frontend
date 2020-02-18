@@ -8,7 +8,7 @@ import '../styles/table.scss';
 class Table extends React.Component {
 
     markSelectedRow = (book) => {
-        return  this.props.selectedBooks.some(o => o.id === book.id);
+        return  this.props.selectedBooks.some(o => o._id === book._id);
     }
 
     handleClick = (book) => {
@@ -30,7 +30,7 @@ class Table extends React.Component {
         return (
             <tbody>
                 {this.props.data.map((book)=>{
-                    return <tr key={book.id} className={this.markSelectedRow(book) ? 'active': ''} onClick={() => this.handleClick(book)}>
+                    return <tr key={book._id} className={this.markSelectedRow(book) ? 'active': ''} onClick={() => this.handleClick(book)}>
                             <td>
                                 <h2 className="single line">{book.title}
                                     <Modal data={book}/>

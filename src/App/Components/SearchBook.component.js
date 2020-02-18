@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import '../styles/searchBook.scss';
-import { searchTerm } from '../actions';
+import '../../styles/searchBook.scss';
+import { searchTerm } from '../../actions';
 
 class SearchBook extends Component {
     

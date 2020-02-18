@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getMyBooks } from '../actions';
-import queryString from 'query-string'
-import Table from '../utils/table.component';
+import { getMyBooks } from '../../actions';
+import Table from '../../components/table.component';
 
 class MyBooks extends Component {
     

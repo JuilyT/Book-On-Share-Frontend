@@ -7,7 +7,7 @@ import throttle from 'lodash/throttle';
 import reducers from './reducers';
 import './index.scss';
 import App from './App';
-import { loadState, saveState } from './utils/localStorage';
+import { loadState, saveState } from './components/localStorage';
 
 const persistedState = loadState();
 const store = createStore(reducers, persistedState, applyMiddleware(thunk));

@@ -2,13 +2,14 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import { BrowserRouter as Router } from "react-router-dom";
 import { HOME, SIGN_IN, BORROW_BOOKS, UPLOAD_BOOK, MY_BOOKS } from './constants/routeAPIs';
-import Home from './home/home.component';
-import BorrowBooks from './components/borrowBooks.component';
-import requireAuth from './components/requireAuth';
-import Menu from './utils/menuSecondary.component';
-import GoogleAuth from './components/googleAuth';
-import UploadBook from './components/uploadBook.component';
-import MyBooks from './components/myBooks.component';
+import Home from './App/Components/Home.component';
+import BorrowBooks from './App/Components/BorrowBooks.component';
+import requireAuth from './App/Components/RequireAuth';
+import Menu from './components/menuSecondary.component';
+import GoogleAuth from './App/Components/GoogleAuth';
+import UploadBook from './App/Components/UploadBook.component';
+import MyBooks from './App/Components/MyBooks.component';
+import Notification from './App/Components/notifications.component';
 
 class App extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class App extends React.Component {
           <Router>
             <div>
                 <Menu/>
+                <Notification />
                 <Route path={HOME} exact component={Home} />
                 <Route path={SIGN_IN} exact component={GoogleAuth} />
                 <Route path={BORROW_BOOKS} exact component={requireAuth(BorrowBooks)} />

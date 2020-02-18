@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { uploadBook } from '../actions';
-import UploadBookForm from './uploadBookForm.component';
-import Notification from './notifications.component';
+import { uploadBook } from '../../actions';
+import UploadBookForm from './UploadBookForm.component';
+import '../../styles/uploadForm.scss';
 
 class UploadBook extends Component {
 
@@ -120,8 +120,7 @@ class UploadBook extends Component {
         const values = { fullName, email, phone, location, bookTitle, bookAuthor, bookCategory,  bookDesc,  bookCover,
                         phoneError, bookTitleError, bookAuthorError, locationError, bookCoverError};
         return (
-            <div>
-                <Notification />
+            <div className='upload-form'>
                 <UploadBookForm
                     handleChange = {this.handleChange}
                     handleImageChange = {this.handleImageChange}

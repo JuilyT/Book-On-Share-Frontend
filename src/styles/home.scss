@@ -1,0 +1,26 @@
+@import "variables";
+
+.home-container {
+    //background-image: url(../assets/images/book_library.jpeg);
+    background-color: $home-background-color;
+    height: 100%; 
+    width: 100%;
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.ui.huge.header {
+    font-size: $huge-header-font-size;
+}
+.ui.placeholder.segment {
+    width: 500px;
+    margin: auto;
+}
+
+.ui.text.container p{
+    font-size: $container-p-text-font-size;
+    color: $container-p-text-color;
+    margin-top: 40px;
+}
